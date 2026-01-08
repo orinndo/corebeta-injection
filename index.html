@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>コアベータ投与 音声ガイド</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Segoe UI",sans-serif;margin:18px;line-height:1.6}
+.panel{border:1px solid #ddd;border-radius:12px;padding:16px}
+button{margin:6px;padding:10px 14px;font-size:14px}
+.jp{font-size:20px;font-weight:600;margin-top:12px}
+.en{font-size:16px;color:#333;margin-top:6px}
+</style>
+<script>
+let cur=0;
+function loadStep(i){
+ cur=i;
+ document.getElementById('jp').innerText=steps[i].jp;
+ document.getElementById('en').innerText=steps[i].en;
+ let a=document.getElementById('audio');
+ a.src='audio/'+String(i+1).padStart(2,'0')+'.m4a';
+}
+function play(){document.getElementById('audio').play();}
+function pause(){document.getElementById('audio').pause();}
+function replay(){let a=document.getElementById('audio');a.currentTime=0;a.play();}
+const steps = [('心拍数が少し高いため、下げるお薬を使います。', 'Your heart rate is a bit high, so we’ll give you some medicine to help lower it.'), ('看護師が1分ほどかけて、ゆっくりお薬を注射します。', 'The nurse will inject the medicine slowly over one minute.'), ('血圧を何回か測定します。', 'I’ll take your blood pressure a few times.'), ('心拍数が安定しましたので、検査を開始します。', 'Your heart rate is stable now, so we’ll start the scan.')];
+window.onload=()=>loadStep(0);
+</script>
+</head>
+<body>
+<h1>コアベータ投与 音声ガイド</h1>
+<div class="panel">
+<div id="jp" class="jp"></div>
+<div id="en" class="en"></div>
+<button onclick="play()">▶ 再生</button>
+<button onclick="pause()">⏸ 一時停止</button>
+<button onclick="replay()">↺ もう一度</button>
+<audio id="audio" controls style="width:100%;margin-top:10px"></audio>
+</div>
+</body>
+</html>
